@@ -1,7 +1,10 @@
 import z from 'zod';
-
-const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
-const ALLOWED_IMAGE_TYPES = ['image/png', 'image/jpeg'];
+import { GENDER_OPTIONS } from '@/constants/genderOptions';
+import {
+  MAX_IMAGE_SIZE,
+  MIN_PASSWORD_LENGTH,
+  ALLOWED_IMAGE_TYPES,
+} from '@/constants/formConstants';
 
 export const FormSchema = z
   .object({
@@ -50,14 +53,19 @@ export const FormSchema = z
         }
       }),
 
-    gender: z.enum(
-      ['Male', 'Female', 'Non-binary', 'Prefer not to say'],
-      { error: 'Please select a gender' }
-    ),
+    gender: z.enum(GENDER_OPTIONS, {
+      error: 'Please select a gender',
+    }),
 
-    password: z.string().min(4, { error: 'Password must be at least 4 characters' }),
+    password: z
+      .string()
+      .min(MIN_PASSWORD_LENGTH, {
+        error: 'Password must be at least 6 characters',
+      }),
 
-    confirmPassword: z.string().min(4, { error: 'Please confirm your password' }),
+    confirmPassword: z
+      .string()
+      .min(MIN_PASSWORD_LENGTH, { error: 'Please confirm your password' }),
 
     image: z
       .file({ error: 'Image is required' })
