@@ -1,31 +1,15 @@
-import ErrorField from '@/components/ErrorField/ErrorField';
+import FormField from '@/components/FormField/FormField';
 
-interface AgeFieldProps {
-  error?: string;
-}
-
-const AgeField = ({ error }: AgeFieldProps) => {
-  return (
-    <div>
-      <label
-        htmlFor="age"
-        className="block text-sm/6 font-medium text-gray-900"
-      >
-        Age
-      </label>
-      <div className="mt-2">
-        <input
-          id="age"
-          name="age"
-          type="number"
-          min="0"
-          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-        />
-      </div>
-
-      <ErrorField error={error} />
-    </div>
-  );
-};
+const AgeField = ({ error }: { error?: string }) => (
+  <FormField id="age" label="Age" error={error}>
+    <input
+      id="age"
+      name="age"
+      type="number"
+      min="0"
+      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+    />
+  </FormField>
+);
 
 export default AgeField;

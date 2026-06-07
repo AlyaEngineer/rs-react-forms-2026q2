@@ -40,7 +40,7 @@ const TermsField = ({ error }: TermsFieldProps) => {
           </label>
         </div>
       </div>
-      
+
       <ErrorField error={error} />
     </div>
   );

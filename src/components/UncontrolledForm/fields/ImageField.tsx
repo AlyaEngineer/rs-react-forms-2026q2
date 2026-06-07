@@ -33,7 +33,7 @@ const ImageField = ({ error }: ImageFieldProps) => {
           <p className="text-xs/5 text-gray-600">PNG, JPG up to 10MB</p>
         </div>
       </div>
-      
+
       <ErrorField error={error} />
     </div>
   );
