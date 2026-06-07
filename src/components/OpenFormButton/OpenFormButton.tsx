@@ -38,7 +38,11 @@ const OpenFormButton = ({ title, formType }: OpenFormButtonProps) => {
         title={title}
         testId={`${formType}-modal`}
       >
-        <FormComponent />
+        <FormComponent
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        />
       </Modal>
     </>
   );
