@@ -10,3 +10,16 @@ export interface FormData {
   isTermsAccepted: boolean;
   submittedAt: number;
 }
+
+export type FormField =
+  | 'name'
+  | 'age'
+  | 'email'
+  | 'gender'
+  | 'password'
+  | 'confirmPassword'
+  | 'image'
+  | 'country'
+  | 'isTermsAccepted';
+
+export type FieldErrors = Partial<Record<FormField, string>>;
