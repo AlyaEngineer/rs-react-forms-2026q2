@@ -4,7 +4,7 @@ export interface FormData {
   id: string;
   formType: FormType;
   name: string;
-  age: number;
+  age: string;
   email: string;
   gender: string;
   password: string;

@@ -12,7 +12,7 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const baseClasses =
-    'cursor-pointer rounded-md px-3 py-2 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2';
+    'cursor-pointer rounded-md px-3 py-2 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variantClasses = {
     primary:
