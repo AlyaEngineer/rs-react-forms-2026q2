@@ -68,6 +68,7 @@ const UncontrolledForm = ({ onClose }: UncontrolledFormProps) => {
       addSubmission({
         id: crypto.randomUUID(),
         submittedAt: Date.now(),
+        formType: 'uncontrolled',
         ...result.data,
         image,
       })

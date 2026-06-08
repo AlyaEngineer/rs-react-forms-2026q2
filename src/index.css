@@ -1,1 +1,16 @@
 @import 'tailwindcss';
+
+@keyframes highlight-fade {
+  0% {
+    background-color: #eef2ff;
+    border-color: #6366f1;
+  }
+  100% {
+    background-color: white;
+    border-color: #e5e7eb;
+  }
+}
+
+.animate-highlight {
+  animation: highlight-fade 3s ease-out forwards;
+}

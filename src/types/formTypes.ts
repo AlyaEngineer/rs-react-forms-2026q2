@@ -1,5 +1,8 @@
+export type FormType = 'uncontrolled' | 'rhf';
+
 export interface FormData {
   id: string;
+  formType: FormType;
   name: string;
   age: number;
   email: string;
