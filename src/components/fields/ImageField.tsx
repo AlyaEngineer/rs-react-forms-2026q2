@@ -2,15 +2,14 @@ import { useState } from 'react';
 import ErrorField from '@/components/ErrorField/ErrorField';
 import { ALLOWED_IMAGE_TYPES, MAX_IMAGE_SIZE } from '@/constants/formConstants';
 
-const ImageField = ({ error }: { error?: string }) => {
-  const [preview, setPreview] = useState<string | null>(null);
+interface ImageFieldProps {
+  error?: string;
+  onChange?: (file: File) => void;
+  onOpen?: () => void;
+}
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const url = URL.createObjectURL(file);
-    setPreview(url);
-  };
+const ImageField = ({ error, onChange, onOpen }: ImageFieldProps) => {
+  const [preview, setPreview] = useState<string | null>(null);
 
   const allowedExtensions = ALLOWED_IMAGE_TYPES.map((type) =>
     type.replace('image/', '').toUpperCase()
@@ -18,11 +17,21 @@ const ImageField = ({ error }: { error?: string }) => {
 
   const maxSizeMb = MAX_IMAGE_SIZE / 1024 / 1024;
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setPreview(url);
+      onChange?.(file);
+    }
+  };
+
   return (
     <div>
       <label
         htmlFor="image"
         className="block text-sm/6 font-medium text-gray-900"
+        onClick={onOpen}
       >
         Image
       </label>

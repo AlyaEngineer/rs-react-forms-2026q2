@@ -5,15 +5,15 @@ import { selectCountries } from '@/store/countriesSlice/countriesSlice.selectors
 import { createFormSchema } from '@/schemas/formSchema';
 import { imageToBase64 } from '@/utils/imageToBase64';
 
-import AgeField from './fields/AgeField';
-import ConfirmPasswordField from './fields/ConfirmPasswordField';
-import CountryField from './fields/CountryField';
-import EmailField from './fields/EmailField';
-import GenderField from './fields/GenderField';
-import ImageField from './fields/ImageField';
-import NameField from './fields/NameField';
-import PasswordField from './fields/PasswordField';
-import TermsField from './fields/TermsField';
+import AgeField from '../fields/AgeField';
+import ConfirmPasswordField from '../fields/ConfirmPasswordField';
+import CountryField from '../fields/CountryField';
+import EmailField from '../fields/EmailField';
+import GenderField from '../fields/GenderField';
+import ImageField from '../fields/ImageField';
+import NameField from '../fields/NameField';
+import PasswordField from '../fields/PasswordField';
+import TermsField from '../fields/TermsField';
 import FormActions from '@/components/FormActions/FormActions';
 import type { FieldErrors, FormField } from '@/types/formTypes';
 
