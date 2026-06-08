@@ -13,28 +13,26 @@ export const createFormSchema = (allowedCountries: string[]) =>
         .string()
         .min(1, { message: 'Name is required' })
         .refine(
-          (nameValue) =>
-            nameValue.length > 0 &&
-            nameValue.startsWith(nameValue[0].toUpperCase()),
-          {
-            message: 'First letter must be uppercase, for example: "Mark"',
-          }
+          (val) => val.length === 0 || val.startsWith(val[0].toUpperCase()),
+          { message: 'First letter must be uppercase, for example: "Mark"' }
         ),
 
       age: z
         .string({ message: 'Age is required' })
         .min(1, { message: 'Age is required' })
-        .transform((val) => Number(val))
-        .pipe(
-          z
-            .number({ message: 'Age must be a number' })
-            .nonnegative({ message: 'Age must be 0 or greater' })
-        ),
+        .refine((val) => !isNaN(Number(val)), {
+          message: 'Age must be a number',
+        })
+        .refine((val) => Number(val) >= 0, {
+          message: 'Age must be 0 or greater',
+        }),
 
       email: z
         .string()
         .min(1, { message: 'Email is required' })
         .superRefine((val, ctx) => {
+          if (val.length === 0) return;
+
           const parts = val.split('@');
 
           if (parts.length !== 2) {
@@ -69,13 +67,19 @@ export const createFormSchema = (allowedCountries: string[]) =>
         message: 'Please select a gender',
       }),
 
-      password: z.string().min(MIN_PASSWORD_LENGTH, {
-        message: 'Password must be at least 6 characters',
-      }),
+      password: z
+        .string()
+        .min(1, { message: 'Password is required' })
+        .refine(
+          (value) => value.length === 0 || value.length >= MIN_PASSWORD_LENGTH,
+          {
+            message: `Password must be at least ${MIN_PASSWORD_LENGTH.toString()} characters`,
+          }
+        ),
 
       confirmPassword: z
         .string()
-        .min(MIN_PASSWORD_LENGTH, { message: 'Please confirm your password' }),
+        .min(1, { message: 'Please confirm your password' }),
 
       image: z
         .file({ message: 'Image is required' })
@@ -90,11 +94,11 @@ export const createFormSchema = (allowedCountries: string[]) =>
       country: z
         .string()
         .min(1, { message: 'Country is required' })
-        .refine((val) => allowedCountries.includes(val), {
+        .refine((val) => val.length === 0 || allowedCountries.includes(val), {
           message: 'Please select a valid country from the list',
         }),
 
-      isTermsAccepted: z.literal(true, {
+      isTermsAccepted: z.boolean().refine((val) => val, {
         message: 'You must accept the Terms & Conditions',
       }),
     })
@@ -107,3 +111,5 @@ export const createFormSchema = (allowedCountries: string[]) =>
         });
       }
     });
+
+export type FormSchemaData = z.infer<ReturnType<typeof createFormSchema>>;
